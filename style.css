@@ -1,0 +1,93 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+        "SF Pro Text", "San Francisco", "Helvetica Neue", "Helvetica", Arial,
+        sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.clock-container {
+    display: flex;
+    align-items: stretch; /* Ensure both clock and calendar stretch vertically */
+    color: white;
+    text-align: center;
+}
+
+.clock {
+    font-size: 8rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    display: flex;
+    align-items: center; /* Vertically center the clock */
+}
+
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    align-items: flex-start; /* Align items to the left */
+    justify-content: center;
+    min-height: 100%; /* Ensure the calendar takes the same height as the clock */
+}
+
+.month-name {
+    font-size: 1.5rem;
+    color: #ff3b30;
+    margin-bottom: 5px; /* Space below the month */
+    align-self: flex-start; /* Align the month name to the left */
+    text-transform: uppercase; /* Make the month name uppercase */
+    margin-left: 8px; /* Move the month name slightly to the right */
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px; /* Reduced gap between the days */
+    width: 100%;
+    max-width: 200px; /* Shrunk the overall width */
+    color: white;
+}
+
+.calendar-grid span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem; /* Reduced font size for day numbers */
+    padding: 5px; /* Reduced padding inside day cells */
+    border-radius: 50%;
+}
+
+.weekday-header {
+    opacity: 0.8;
+    font-size: 0.9rem; /* Reduced font size for weekday headers */
+}
+
+.today {
+    background-color: #ff3b30;
+    color: white;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .clock {
+        font-size: 5rem;
+    }
+
+    .month-name {
+        font-size: 1.3rem;
+    }
+
+    .calendar-grid span {
+        font-size: 0.8rem;
+    }
+}

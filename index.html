@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>iPhone Standby Clock</title>
+        <link rel="stylesheet" href="style.css" />
+        <!-- Link to external CSS file -->
+    </head>
+    <body>
+        <div class="clock-container">
+            <div id="time" class="clock"></div>
+            <div class="calendar-container">
+                <div id="month-name" class="month-name"></div>
+                <div class="calendar-grid" id="calendar-grid"></div>
+            </div>
+        </div>
+
+        <script>
+            function updateClock() {
+                const now = new Date();
+
+                // Get current time without seconds
+                let hours = now.getHours();
+                let minutes = now.getMinutes();
+
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+
+                document.getElementById(
+                    "time"
+                ).textContent = `${hours}:${minutes}`;
+
+                // Update calendar with the current month and day
+                updateCalendar(now);
+            }
+
+            function updateCalendar(date) {
+                const monthNames = [
+                    "January",
+                    "February",
+                    "March",
+                    "April",
+                    "May",
+                    "June",
+                    "July",
+                    "August",
+                    "September",
+                    "October",
+                    "November",
+                    "December",
+                ];
+
+                const dayNames = ["S", "M", "T", "W", "T", "F", "S"];
+
+                const month = date.getMonth();
+                const year = date.getFullYear();
+
+                // Display the month name
+                document.getElementById("month-name").textContent =
+                    monthNames[month];
+
+                const calendarGrid = document.getElementById("calendar-grid");
+                calendarGrid.innerHTML = ""; // Clear previous calendar
+
+                // Create the weekday headers in the grid
+                dayNames.forEach((day) => {
+                    const dayElement = document.createElement("span");
+                    dayElement.textContent = day;
+                    dayElement.classList.add("weekday-header");
+                    calendarGrid.appendChild(dayElement);
+                });
+
+                // Get the first day of the month
+                const firstDayOfMonth = new Date(year, month, 1).getDay();
+
+                // Get the number of days in the month
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+                // Fill in the empty days before the first day of the month
+                for (let i = 0; i < firstDayOfMonth; i++) {
+                    const emptyDay = document.createElement("span");
+                    calendarGrid.appendChild(emptyDay);
+                }
+
+                // Fill in the days of the month
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dayElement = document.createElement("span");
+                    dayElement.textContent = day;
+
+                    // Highlight today's date
+                    if (day === date.getDate()) {
+                        dayElement.classList.add("today");
+                    }
+
+                    calendarGrid.appendChild(dayElement);
+                }
+            }
+
+            // Update clock every minute
+            setInterval(updateClock, 1000);
+
+            // Initialize the clock and calendar
+            updateClock();
+        </script>
+    </body>
+</html>

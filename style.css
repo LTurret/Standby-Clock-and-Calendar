@@ -7,9 +7,7 @@
 
 body {
     background-color: #000;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-        "SF Pro Text", "San Francisco", "Helvetica Neue", "Helvetica", Arial,
-        sans-serif;
+    font-family: "Inter", "Roboto", "Helvetica Neue", "Arial", sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;

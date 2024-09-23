@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>iPhone Standby Clock</title>
         <link rel="stylesheet" href="style.css" />
+        <script src="script.js"></script>
     </head>
     <body>
         <div class="clock-container">
@@ -14,89 +15,5 @@
                 <div class="calendar-grid" id="calendar-grid"></div>
             </div>
         </div>
-
-        <script>
-            function updateClock() {
-                const now = new Date();
-                let hours = now.getHours();
-                let minutes = now.getMinutes();
-                hours = hours < 10 ? "0" + hours : hours;
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                document.getElementById(
-                    "time"
-                ).textContent = `${hours}:${minutes}`;
-                updateCalendar(now);
-            }
-
-            function updateCalendar(date) {
-                const monthNames = [
-                    "January",
-                    "February",
-                    "March",
-                    "April",
-                    "May",
-                    "June",
-                    "July",
-                    "August",
-                    "September",
-                    "October",
-                    "November",
-                    "December",
-                ];
-                const dayNames = ["S", "M", "T", "W", "T", "F", "S"];
-                const month = date.getMonth();
-                const year = date.getFullYear();
-                document.getElementById("month-name").textContent =
-                    monthNames[month];
-                const calendarGrid = document.getElementById("calendar-grid");
-                calendarGrid.innerHTML = ""; // Clear previous calendar
-
-                // Create weekday headers
-                dayNames.forEach((day) => {
-                    const dayElement = document.createElement("span");
-                    dayElement.textContent = day;
-                    dayElement.classList.add("weekday-header");
-                    calendarGrid.appendChild(dayElement);
-                });
-
-                const firstDayOfMonth = new Date(year, month, 1).getDay();
-                const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-                // Fill in empty days
-                for (let i = 0; i < firstDayOfMonth; i++) {
-                    const emptyDay = document.createElement("span");
-                    calendarGrid.appendChild(emptyDay);
-                }
-
-                // Fill in days of the month
-                for (let day = 1; day <= daysInMonth; day++) {
-                    const dayElement = document.createElement("span");
-                    dayElement.textContent = day;
-                    if (day === date.getDate()) {
-                        dayElement.classList.add("today");
-                    }
-                    calendarGrid.appendChild(dayElement);
-                }
-            }
-
-            function toggleFullscreen() {
-                if (!document.fullscreenElement) {
-                    document.documentElement
-                        .requestFullscreen()
-                        .catch((err) => {
-                            console.error(
-                                `Error attempting to enable full-screen mode: ${err.message} (${err.name})`
-                            );
-                        });
-                } else {
-                    document.exitFullscreen();
-                }
-            }
-
-            // Update clock every minute
-            setInterval(updateClock, 1000);
-            // Initialize the clock and calendar
-            updateClock();
-        </script>
     </body>
 </html>
